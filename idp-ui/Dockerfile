@@ -78,6 +78,7 @@
     COPY --from=builder /app/package.json package.json
     COPY --from=builder /app/node_modules node_modules
     COPY --from=builder /app/next.config.ts next.config.ts
+    COPY --from=builder /app/nginx.conf  /etc/nginx/nginx.conf
     
     EXPOSE 3000
     
