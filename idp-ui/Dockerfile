@@ -10,6 +10,9 @@ RUN cd /opt && \
     tar -xJf node-v22.16.0-linux-arm64.tar.xz && \
     rm node-v22.16.0-linux-arm64.tar.xz
 
+RUN     microdnf module disable nginx  -y && \
+        microdnf module enable nginx:1.28 -y && \
+        microdnf install  -y  nginx
 
 # Add Node.js to PATH
 ENV PATH="/opt/node-v22.16.0-linux-arm64/bin:$PATH"
@@ -36,6 +39,9 @@ RUN cd /opt && \
     tar -xJf node-v22.16.0-linux-arm64.tar.xz && \
     rm node-v22.16.0-linux-arm64.tar.xz
 
+RUN     microdnf module disable nginx  -y && \
+        microdnf module enable nginx:1.28 -y && \
+        microdnf install  -y  nginx
 
 # Add Node.js to PATH
 ENV PATH="/opt/node-v22.16.0-linux-arm64/bin:$PATH"
@@ -48,10 +54,13 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/next.config.ts ./next.config.ts 
+COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
 
 # Optional: define port (Next.js uses 3000 by default)
-ENV PORT=3000
-EXPOSE 3000
+
+RUN npm run start
+# ENV PORT=3000
+EXPOSE 80
 
 CMD ["node_modules/.bin/next", "start"]
 
