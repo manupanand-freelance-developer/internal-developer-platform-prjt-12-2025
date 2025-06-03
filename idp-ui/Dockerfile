@@ -80,7 +80,7 @@
     COPY --from=builder /app/next.config.ts next.config.ts
     COPY --from=builder /app/nginx.conf  /etc/nginx/nginx.conf
     
-    EXPOSE 3000
+    EXPOSE 80
     
     CMD ["npm", "run", "start"]
     
