@@ -43,7 +43,7 @@ ENV PATH="/opt/node-v22.16.0-linux-arm64/bin:$PATH"
 WORKDIR /app
 
 # Copy necessary files from builder
-COPY  --from=builder  /app/*  ./app
+COPY  --from=builder  /app/*  ./
 # COPY --from=builder /app/public ./public
 # COPY --from=builder /app/.next ./.next
 # COPY --from=builder /app/package.json ./package.json
