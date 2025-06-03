@@ -62,7 +62,8 @@ RUN npm run start
 # ENV PORT=3000
 EXPOSE 80
 
-CMD ["node_modules/.bin/next", "start"]
+# CMD ["node_modules/.bin/next", "start"]
+CMD [ "nginx","-g","daemon off" ]
 
 # FROM node:22-alpine
 
