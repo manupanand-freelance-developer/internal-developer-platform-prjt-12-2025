@@ -2,7 +2,7 @@
 FROM docker.io/redhat/ubi9-minimal:latest AS builder
 
 # Install necessary tools
-RUN microdnf install -y tar xz  bash && microdnf clean all
+RUN microdnf install -y tar xz nginx bash && microdnf clean all
 
 # Install Node.js v22.14.0
 RUN cd /opt && \
@@ -10,9 +10,6 @@ RUN cd /opt && \
     tar -xJf node-v22.16.0-linux-arm64.tar.xz && \
     rm node-v22.16.0-linux-arm64.tar.xz
 
-RUN     microdnf module disable nginx  -y && \
-        microdnf module enable nginx:1.28 -y && \
-        microdnf install  -y  nginx
 
 # Add Node.js to PATH
 ENV PATH="/opt/node-v22.16.0-linux-arm64/bin:$PATH"
@@ -31,7 +28,7 @@ RUN npm run build
 FROM docker.io/redhat/ubi9-minimal:latest
 
 # Install necessary tools
-RUN microdnf install -y tar xz  bash && microdnf clean all
+RUN microdnf install -y tar xz nginx bash && microdnf clean all
 
 # Install Node.js v22.14.0
 RUN cd /opt && \
@@ -39,9 +36,6 @@ RUN cd /opt && \
     tar -xJf node-v22.16.0-linux-arm64.tar.xz && \
     rm node-v22.16.0-linux-arm64.tar.xz
 
-RUN     microdnf module disable nginx  -y && \
-        microdnf module enable nginx:1.28 -y && \
-        microdnf install  -y  nginx
 
 # Add Node.js to PATH
 ENV PATH="/opt/node-v22.16.0-linux-arm64/bin:$PATH"
