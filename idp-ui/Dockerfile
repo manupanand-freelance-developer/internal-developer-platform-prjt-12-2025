@@ -48,16 +48,17 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/next.config.ts ./next.config.ts 
+COPY --from=builder /app/run.sh ./run.sh
 COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
 
 # Optional: define port (Next.js uses 3000 by default)
 
-RUN npm run start
+# RUN npm run start
 # ENV PORT=3000
 EXPOSE 80
 
 # CMD ["node_modules/.bin/next", "start"]
-CMD [ "nginx","-g","daemon off" ]
+CMD [ "bash","./run.sh" ]
 
 # FROM node:22-alpine
 
