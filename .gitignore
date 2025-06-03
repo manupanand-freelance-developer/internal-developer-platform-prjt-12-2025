@@ -16,3 +16,5 @@
 ./user-manage-service/.env.local
 ./user-manage-service/.env.*
 ./user-manage-service/node_modules
+
+./react-page/node_modules
